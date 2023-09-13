@@ -1,15 +1,13 @@
 [Unit]
 Description=gunicorn daemon
-Requires=gunicorn.socket
+Requires=ecom.socket
 After=network.target
 
 [Service]
 User=root
 Group=www-data
 WorkingDirectory=/var/lib/jenkins/workspace/e-com/app
-ExecStart=/var/lib/jenkins/workspace/e-com/env/bin/gunicorn 
-    --workers 3 --log-level debug --error-logfile /var/lib/jenkins/workspace/e-com/logs/error.log 
-    --bind unix:/run/ecom.sock config.wsgi:application
+ExecStart=/var/lib/jenkins/workspace/e-com/env/bin/gunicorn --workers 3 --log-level debug --error-logfile /var/lib/jenkins/workspace/e-com/logs/error.log --bind unix:/run/ecom.sock config.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
