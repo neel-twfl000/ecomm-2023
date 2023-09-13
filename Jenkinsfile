@@ -10,14 +10,14 @@ pipeline{
             ./jenkins/envsetup.sh
             '''}
         }
-        // stage('Setup Gunicorn Setup'){
-        //     steps {
-        //         sh '''
-        //         chmod +x gunicorn.sh
-        //         ./jenkins/gunicorn.sh
-        //         '''
-        //     }
-        // }
+        stage('Setup Gunicorn Setup'){
+            steps {
+                sh '''
+                chmod +x ./jenkins/gunicorn.sh
+                ./jenkins/gunicorn.sh
+                '''
+            }
+        }
         // stage('setup NGINX'){
         //     steps {
         //         sh '''
