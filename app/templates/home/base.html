@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+   <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
+   {% include 'home/parts/header_link.html' %}
+</head>
+<body class="bg-light">
+    {% include 'home/parts/components/nav_bar.html' %}
+
+    {% block body %}
+    {% endblock body %}
+
+    
+    {% include 'home/parts/components/footer.html' %}
+    {% include 'home/parts/components/product_popup.html' %}
+    {% include 'home/parts/components/cart_side.html' %} 
+    {% include 'home/parts/components/wishlist_side.html' %} 
+    {% include 'home/parts/components/account_popup.html' %}
+    {% include 'home/parts/components/setting_popup.html' %}
+    {% comment %} {% include 'home/parts/components/push_notification.html' %} {% endcomment %}
+
+    {% include 'home/parts/footer_link.html' %}
+</body>
+</html>
