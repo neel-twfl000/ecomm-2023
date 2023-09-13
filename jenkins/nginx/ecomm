@@ -1,17 +1,17 @@
 server {
-    server_name 139.59.68.248;
+    server_name ecom.coder-i.com;
     client_max_body_size 900M;
     charset utf-8;
     underscores_in_headers on;
 
-    error_log /var/lib/jenkins/workspace/coder-i-backend/logs/error.log;
+    error_log /var/lib/jenkins/workspace/e-com/logs/error.log;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        alias /var/lib/jenkins/workspace/coder-i-backend/app/staticfiles/;
+        alias /var/lib/jenkins/workspace/e-com/app/staticfiles/;
     }
     location /media/ {
-        root /var/lib/jenkins/workspace/coder-i-backend/app;
+        root /var/lib/jenkins/workspace/e-com/app;
         client_max_body_size 900M;
     }
     location / {
@@ -20,8 +20,7 @@ server {
         proxy_send_timeout          600;
         proxy_read_timeout          600;
         send_timeout                600;    
-        proxy_set_header Host $host;
-        proxy_pass http://unix:/run/gunicorn.sock;
+        proxy_pass http://unix:/run/ecom.sock;
     }
 }
 
