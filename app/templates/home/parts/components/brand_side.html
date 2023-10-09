@@ -1,80 +1,35 @@
 {% load static %}
+{% if brand %}
 <div class="title8 section-mb-space ">
    <h4>featured brands</h4>
 </div>
+
+<style>
+   .brand-image{
+      height: 45px;
+   }
+</style>
 
 <section class="brand-second section-big-mb-space">
    <div class="container-fluid">
       <div class="row brand-block">
          <div class="col-12">
             <div class="brand-slide12 no-arrow mb--5">
+            {% for i in brand %}
                <div>
                   <div class="brand-box">
+                  {% if i.image %}
+                     <img src="{{i.image.url}}" alt="brand" class="img-fluid brand-image">
+                  {% else %}
                      <img src="/static/home/images/mega-store/brand/1.png" alt="brand" class="img-fluid">
+                  {% endif %}
                   </div>
                </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/2.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/3.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/4.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/5.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/6.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/7.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/4.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/5.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/6.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/4.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/5.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
-               <div>
-                  <div class="brand-box">
-                     <img src="/static/home/images/mega-store/brand/6.png" alt="brand" class="img-fluid">
-                  </div>
-               </div>
+            {% endfor %}
             </div>
          </div>
       </div>
    </div>
 </section>
+
+{% endif %}

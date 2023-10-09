@@ -1,18 +1,7 @@
 from pathlib import Path
+# from ...db_list import DB_LIST
+from .db_list import DB_LIST
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-DB_LIST = [
-    {
-        "key":"indranil", 
-        "db_name":"db1", 
-        "domain":"indranil",
-    },
-    {
-        "key":"default", 
-        "db_name":"db", 
-        "domain":"demo",
-    },
-]
 
 def get_database():
     data = {}

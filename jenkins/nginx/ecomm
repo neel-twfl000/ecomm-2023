@@ -1,5 +1,5 @@
 server {
-    server_name ecom.coder-i.com;
+    server_name *.ecommerence.in ecommerence.in;
     client_max_body_size 900M;
     charset utf-8;
     underscores_in_headers on;
@@ -22,6 +22,25 @@ server {
         send_timeout                600;    
         proxy_pass http://unix:/run/ecom.sock;
     }
+    # listen 443 ssl; # managed by Certbot
+    # ssl_certificate /etc/letsencrypt/live/demo.ecommerence.in/fullchain.pem; # managed by Certbot
+    # ssl_certificate_key /etc/letsencrypt/live/demo.ecommerence.in/privkey.pem; # managed by Certbot
+    # include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    # ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 }
+
+# server {
+#     if ($host = demo.ecommerence.in) {
+#         return 301 https://$host$request_uri;
+#     } # managed by Certbot
+
+#     server_name demo.ecommerence.in;
+#     listen 80;
+#     return 404; # managed by Certbot
+
+
+
+
+# }
 
 

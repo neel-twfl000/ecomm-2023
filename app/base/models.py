@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _
 class BaseModel(models.Model):
     created_at = models.DateTimeField(default=now)
     updated_at = models.DateTimeField(default=now)
+    is_active = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
@@ -16,6 +17,7 @@ class BaseModel(models.Model):
         data = model_to_dict(self)
         data["created_at"] = self.created_at
         data["updated_at"] = self.updated_at
+        data["is_active"] = self.is_active
         return data
 
 class AccountManager(BaseUserManager):
