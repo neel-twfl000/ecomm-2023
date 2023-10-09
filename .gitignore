@@ -1,3 +1,4 @@
 env
 env/
 app/seed.py
+seed.py
