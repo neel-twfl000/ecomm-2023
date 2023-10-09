@@ -10,31 +10,14 @@ from base.choices import Choices
 class ProductQuerySet(models.QuerySet):
     def shop_product(self):
         return self.filter(
-            ~Q(Exists(DealsOffer.objects.filter(product_list__id=OuterRef('pk'), is_active=True))),
+            # ~Q(Exists(DealsOffer.objects.filter(product_list__id=OuterRef('pk'), is_active=True))),
             is_active=True
             ).annotate(
+            gst_price = (F('discount_price')*F('gst'))/100,
             discount_rate = ((F('price')-F('discount_price'))*100)/F('price'),
             purchase_price=F('gst_price')+F('discount_price'),
             ).order_by('-created_at')
     
-    def all(self):
-        return self.filter(
-            is_active=True
-            ).annotate(
-            discount_rate = ((F('price')-F('discount_price'))*100)/F('price'),
-            purchase_price=F('gst_price')+F('discount_price'),
-            ).order_by('-created_at')
-
-### MANAGER ###
-# class ProductManager(models.Manager):
-#     def get_queryset(self):
-#         return ProductQuerySet(self.model, using=self._db)
-    
-#     def shop_product(self):
-#         return self.get_queryset().shop_product()
-
-
-
 ### MODELS ###
 class Banner(BaseModel):
     banner_type = models.IntegerField(choices=Choices().banner_type, default=1, unique=True)
@@ -99,7 +82,6 @@ class Product(BaseModel):
     price = models.FloatField(default=0)
     discount_price = models.FloatField(default=0)
     gst = models.FloatField(default=0)
-    gst_price = models.FloatField(default=0)
     description = models.TextField(null=True)
     objects = ProductQuerySet.as_manager()
 
@@ -110,7 +92,6 @@ class Product(BaseModel):
         return self.name 
     
     def save(self, *args, **kwargs):
-        self.gst_price = (self.discount_price*self.gst)/100
         if not self.id:
             super(Product, self).save(*args, **kwargs)
             self.slug = f"{slugify(self.name)}-{self.id}"
@@ -145,7 +126,6 @@ class Product(BaseModel):
     #             return i[1]
                 
     #     return self.ac_type
-
 
 class DealsOffer(BaseModel):
     name = models.CharField(max_length=30, unique=True)

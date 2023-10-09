@@ -3,7 +3,7 @@ from django.contrib.messages import constants as messages
 import os
 from datetime import timedelta
 from decouple import config
-from .tenants.db import DATABASES
+from .tenants.db import get_database
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
@@ -66,7 +66,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-DATABASES = DATABASES
+DATABASES = get_database(BASE_DIR)
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=10),

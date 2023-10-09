@@ -15,26 +15,18 @@ class Home(View):
         data['brand'] = Brand.objects.all().order_by('-name')[0:15]
         data['category'] = Category.objects.all().prefetch_related('subcategory_set')
         data['product'] = Product.objects.shop_product()[0:10]
-
         data['deals'] = []
-
-
         for i in DealsOffer.objects.filter(is_active=True)[0:3]:
-            obj = {}
+            obj = {"id":i.id, "name":i.name, "slug":i.slug}
+            obj["products"] = i.product_list.all().annotate(
+                before_price = F('discount_price') + (F('discount_price')*F('gst')/100),
+                deal_off_price = F('discount_price')-(F('discount_price')*i.off_rate)/100,
+                gst_price = (F('deal_off_price')*F('gst'))/100,
+                purchase_price = F('deal_off_price')+F('gst_price'),
+                discount_rate = ((F('discount_price')-F('deal_off_price'))*100)/F('discount_price'),
+            )
             data['deals'].append(obj)
-
-
-
-        x = data['deals']
-        for i in x:
-            print(i)
         
-
-        # print(x.product_list)
-
-        # for i in (x.product_list.all()):
-        #     print(i.purchase_price)
-
         return render(request, html_path('home'), data)
 
 
