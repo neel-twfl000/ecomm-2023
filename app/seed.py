@@ -3,9 +3,9 @@ command = os.system
 from config.tenants.db_list import DB_LIST
 
 def migrate_all_db():
-    command("python app/manage.py makemigrations")
+    command("python3 app/manage.py makemigrations")
     for i in DB_LIST:
-        cmd = f"python app/manage.py migrate --database={i['key']}"
+        cmd = f"python3 app/manage.py migrate --database={i['key']}"
         print(f"Migrate For {i['key']}")
         command(cmd)
 
